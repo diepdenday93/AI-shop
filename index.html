@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Tools Shop — Reseller Chính Hãng</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080c14;
+    --surface: #0e1420;
+    --surface2: #141b29;
+    --border: rgba(255,255,255,0.07);
+    --text: #e8edf5;
+    --muted: #6b7a96;
+    --accent: #4f8eff;
+    --accent2: #a855f7;
+    --green: #22c55e;
+    --yellow: #f59e0b;
+    --red: #ef4444;
+    --glow: rgba(79,142,255,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* BG EFFECTS */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -200px; left: 50%;
+    transform: translateX(-50%);
+    width: 800px; height: 600px;
+    background: radial-gradient(ellipse, rgba(79,142,255,0.08) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0;
+    background: rgba(8,12,20,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 0;
+    z-index: 100;
+  }
+  .nav-inner {
+    max-width: 1100px; margin: 0 auto;
+    padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px; font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--accent); }
+  .nav-cta {
+    background: var(--accent);
+    color: #fff; border: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .nav-cta:hover { background: #6b9fff; transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    max-width: 1100px; margin: 0 auto;
+    padding: 80px 24px 60px;
+    text-align: center;
+    position: relative; z-index: 1;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(79,142,255,0.1);
+    border: 1px solid rgba(79,142,255,0.25);
+    border-radius: 100px;
+    padding: 6px 16px; font-size: 13px;
+    color: var(--accent); margin-bottom: 28px;
+  }
+  .hero-badge::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--accent); border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity:1; transform:scale(1); }
+    50% { opacity:0.5; transform:scale(1.3); }
+  }
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 800; line-height: 1.05;
+    letter-spacing: -2px; margin-bottom: 20px;
+  }
+  h1 .gradient {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    font-size: 17px; color: var(--muted);
+    max-width: 500px; margin: 0 auto 40px;
+    line-height: 1.6;
+  }
+  .hero-stats {
+    display: flex; justify-content: center; gap: 48px;
+    margin-top: 48px; padding-top: 48px;
+    border-top: 1px solid var(--border);
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px; font-weight: 800;
+    color: var(--text);
+  }
+  .stat-label { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+  /* SECTION */
+  section { max-width: 1100px; margin: 0 auto; padding: 64px 24px; position: relative; z-index: 1; }
+  .section-header { margin-bottom: 40px; }
+  .section-label {
+    font-size: 12px; font-weight: 500; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 700; letter-spacing: -1px;
+  }
+  .section-desc { color: var(--muted); margin-top: 8px; font-size: 15px; }
+
+  /* TABS */
+  .tabs { display: flex; gap: 4px; background: var(--surface); padding: 4px; border-radius: 12px; width: fit-content; margin-bottom: 40px; }
+  .tab {
+    padding: 10px 22px; border-radius: 8px; border: none;
+    font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+    cursor: pointer; transition: all 0.2s;
+    color: var(--muted); background: transparent;
+  }
+  .tab.active { background: var(--accent); color: #fff; }
+  .tab:hover:not(.active) { color: var(--text); }
+
+  /* PRODUCT GRID */
+  .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+  .product-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px;
+    transition: all 0.25s; cursor: pointer;
+    position: relative; overflow: hidden;
+  }
+  .product-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0; transition: opacity 0.25s;
+  }
+  .product-card:hover { border-color: rgba(79,142,255,0.3); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+  .product-card:hover::before { opacity: 1; }
+  .product-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; }
+  .product-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .badge-hot {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
+    padding: 3px 10px; border-radius: 100px;
+    background: rgba(239,68,68,0.15); color: #ef4444;
+    border: 1px solid rgba(239,68,68,0.3);
+  }
+  .badge-new {
+    background: rgba(34,197,94,0.12); color: var(--green);
+    border: 1px solid rgba(34,197,94,0.3);
+  }
+  .product-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px; font-weight: 700; margin-bottom: 4px;
+  }
+  .product-desc { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 16px; }
+  
+  .pricing-row {
+    display: flex; gap: 8px;
+  }
+  .price-badge {
+    flex: 1; background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 10px 12px;
+    text-align: center;
+    transition: all 0.2s;
+  }
+  .price-badge:hover { border-color: var(--accent); }
+  .price-duration { font-size: 11px; color: var(--muted); margin-bottom: 3px; }
+  .price-amount { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; }
+  .price-save { font-size: 10px; color: var(--green); margin-top: 2px; }
+  
+  .product-footer { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .stock { font-size: 12px; display: flex; align-items: center; gap: 6px; color: var(--muted); }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+  .dot.warn { background: var(--yellow); }
+  .order-btn {
+    background: var(--accent); color: #fff;
+    border: none; padding: 8px 18px; border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .order-btn:hover { background: #6b9fff; }
+
+  /* BẢNG GIÁ SO SÁNH */
+  .comparison-table {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden;
+  }
+  .ct-header {
+    display: grid; grid-template-columns: 1fr 100px 100px 100px 100px;
+    gap: 0; background: var(--surface2);
+    padding: 14px 20px; font-size: 12px; font-weight: 500;
+    color: var(--muted); text-transform: uppercase; letter-spacing: 1px;
+  }
+  .ct-row {
+    display: grid; grid-template-columns: 1fr 100px 100px 100px 100px;
+    padding: 14px 20px;
+    border-top: 1px solid var(--border);
+    font-size: 14px; align-items: center;
+    transition: background 0.15s;
+  }
+  .ct-row:hover { background: var(--surface2); }
+  .ct-row .tool-info { display: flex; align-items: center; gap: 12px; }
+  .ct-row .tool-icon { font-size: 18px; }
+  .ct-row .tool-name { font-weight: 500; }
+  .ct-row .tool-tier { font-size: 11px; color: var(--muted); }
+  .ct-row .price { font-family: 'Syne', sans-serif; font-weight: 600; text-align: center; }
+  .ct-row .price.highlight { color: var(--accent); }
+
+  /* REVIEWS */
+  .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .review-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 20px;
+  }
+  .review-stars { color: var(--yellow); font-size: 13px; margin-bottom: 12px; }
+  .review-text { font-size: 14px; color: #c0cce0; line-height: 1.6; margin-bottom: 16px; font-style: italic; }
+  .reviewer { display: flex; align-items: center; gap: 10px; }
+  .reviewer-avatar {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 600; color: #fff;
+  }
+  .reviewer-name { font-size: 14px; font-weight: 500; }
+  .reviewer-date { font-size: 12px; color: var(--muted); }
+
+  /* HOW TO ORDER */
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+  .step-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 24px;
+    position: relative;
+  }
+  .step-num {
+    font-family: 'Syne', sans-serif; font-size: 42px; font-weight: 800;
+    color: rgba(79,142,255,0.15); line-height: 1; margin-bottom: 12px;
+  }
+  .step-title { font-weight: 600; margin-bottom: 6px; }
+  .step-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* CONTACT / ORDER FORM */
+  .form-container {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 20px; padding: 40px;
+    max-width: 600px;
+  }
+  .form-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 24px; font-weight: 700; margin-bottom: 8px;
+  }
+  .form-sub { color: var(--muted); font-size: 14px; margin-bottom: 28px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .form-group { margin-bottom: 16px; }
+  label { font-size: 13px; font-weight: 500; display: block; margin-bottom: 7px; }
+  input, select, textarea {
+    width: 100%; background: var(--surface2);
+    border: 1px solid var(--border); border-radius: 10px;
+    padding: 12px 14px; color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-size: 14px;
+    outline: none; transition: border-color 0.2s;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+  select option { background: var(--surface2); }
+  textarea { resize: vertical; min-height: 100px; }
+  .submit-btn {
+    width: 100%; background: var(--accent); color: #fff;
+    border: none; padding: 14px;
+    border-radius: 12px; font-family: 'Syne', sans-serif;
+    font-size: 15px; font-weight: 700; cursor: pointer;
+    transition: all 0.2s; margin-top: 8px;
+  }
+  .submit-btn:hover { background: #6b9fff; transform: translateY(-1px); }
+  .contact-alt {
+    margin-top: 24px; padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 13px; color: var(--muted); text-align: center;
+  }
+  .contact-alt a { color: var(--accent); text-decoration: none; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 24px; text-align: center;
+    color: var(--muted); font-size: 13px;
+    position: relative; z-index: 1;
+  }
+
+  /* TAB CONTENT */
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .hero-stats { gap: 24px; }
+    .ct-header, .ct-row { grid-template-columns: 1fr 80px 80px; }
+    .ct-header span:nth-child(4), .ct-header span:nth-child(5),
+    .ct-row div:nth-child(4), .ct-row div:nth-child(5) { display: none; }
+    .form-row { grid-template-columns: 1fr; }
+    .form-container { padding: 24px; }
+  }
+
+  /* ANIM */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(20px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+  .hero { animation: fadeUp 0.6s ease both; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo">AI<span>Sub</span>Shop</div>
+    <a href="#order" class="nav-cta">Đặt hàng ngay</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">✅ Reseller Chính Hãng — Giao Nhanh 5 Phút</div>
+  <h1>Mua <span class="gradient">AI Sub</span> Giá Tốt<br>Uy Tín — Nhanh — Bảo Hành</h1>
+  <p class="hero-sub">ChatGPT Plus, Claude Pro, Midjourney, Cursor, Gemini và hơn 20 tool AI khác. Giá reseller, hỗ trợ 24/7.</p>
+  <a href="#products" class="nav-cta" style="font-size:15px;padding:14px 32px;">Xem bảng giá →</a>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">500+</div>
+      <div class="stat-label">Khách hàng</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">4.9★</div>
+      <div class="stat-label">Đánh giá TB</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">5 phút</div>
+      <div class="stat-label">Giao hàng</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">24/7</div>
+      <div class="stat-label">Hỗ trợ</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="section-header">
+    <div class="section-label">Sản phẩm</div>
+    <h2 class="section-title">Tất cả AI Tools</h2>
+    <p class="section-desc">Chọn theo nhu cầu — cá nhân, gia đình hay team</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('all')">Tất cả</button>
+    <button class="tab" onclick="switchTab('chat')">Chat AI</button>
+    <button class="tab" onclick="switchTab('image')">Image AI</button>
+    <button class="tab" onclick="switchTab('code')">Code AI</button>
+  </div>
+
+  <div class="products-grid" id="products-grid">
+    <!-- ChatGPT -->
+    <div class="product-card" data-cat="chat">
+      <div class="product-header">
+        <div class="product-icon" style="background:rgba(16,163,127,0.15)">🤖</div>
+        <span class="badge-hot">HOT</span>
+      </div>
+      <div class="product-name">ChatGPT Plus</div>
+      <div class="product-desc">GPT-4o, DALL·E, plugins. Không giới hạn tin nhắn. Tài khoản riêng hoặc share.</div>
+      <div class="pricing-row">
+        <div class="price-badge"><div class="price-duration">1 tháng</div><div class="price-amount">180k</div></div>
+        <div class="price-badge"><div class="price-duration">3 tháng</div><div class="price-amount">490k</div><div class="price-save">Tiết 50k</div></div>
+        <div class="price-badge"><div class="price-duration">1 năm</div><div class="price-amount">1.6M</div><div class="price-save">Tiết 560k</div></div>
+      </div>
+      <div class="product-footer">
+        <div class="stock"><div class="dot"></div> Còn hàng</div>
+        <button class="order-btn" onclick="fillOrder('ChatGPT Plus')">Đặt ngay</button>
+      </div>
+    </div>
+
+    <!-- Claude Pro -->
+    <div class="product-card" data-cat="chat">
+      <div class="product-header">
+        <div class="product-icon" style="background:rgba(168,85,247,0.15)">✦</div>
+        <span class="badge-hot badge-new">NEW</span>
+      </div>
+      <div class="product-name">Claude Pro</div>
+      <div class="product-desc">Claude Sonnet 4, Projects, tải file PDF/code. Giỏi lập trình & phân tích văn bản nhất.</div>
+      <div class="pricing-row">
+        <div class="price-badge"><div class="price-duration">1 tháng</div><div class="price-amount">190k</div></div>
+        <div class="price-badge"><div class="price-duration">3 tháng</div><div class="price-amount">520k</div><div class="price-save">Tiết 50k</div></div>
+        <div class="price-badge"><div class="price-duration">1 năm</div><div class="price-amount">1.7M</div><div class="price-save">Tiết 580k</div></div>
+      </div>
+      <div class="product-footer">
+        <div class="stock"><div class="dot"></div> Còn hàng</div>
+        <button class="order-btn" onclick="fillOrder('Claude Pro')">Đặt ngay</button>
+      </div>
+    </div>
+
+    <!-- Gemini Advanced -->
+    <div class="product-card" data-cat="chat">
+      <div class="product-header">
+        <div class="product-icon" style="background:rgba(66,133,244,0.15)">♊</div>
+      </div>
+      <div class="product-name">Gemini Advanced</div>
+      <div class="product-desc">Gemini 1.5 Pro, tích hợp Google Workspace, context 1M token. Kèm 2TB Google Drive.</div>
+      <div class="pricing-row">
+        <div class="price-badge"><div class="price-duration">1 tháng</div><div class="price-amount">150k</div></div>
+        <div class="price-badge"><div class="price-duration">3 tháng</div><div class="price-amount">400k</div><div class="price-save">Tiết 50k</div></div>
+        <div class="price-badge"><div class="price-duration">1 năm</div><div class="price-amount">1.4M</div><div class="price-save">Tiết 400k</div></div>
+      </div>
+      <div class="product-footer">
+        <div class="stock"><div class="dot warn"></div> Sắp hết</div>
+        <button class="order-btn" onclick="fillOrder('Gemini Advanced')">Đặt ngay</button>
+      </div>
+    </div>
+
+    <!-- Midjourney -->
+    <div class="product-card" data-cat="image">
+      <div class="product-header">
+        <div class="product-icon" style="background:rgba(245,158,11,0.15)">🎨</div>
+        <span class="badge-hot">HOT</span>
+      </div>
+      <div class="product-name">Midjourney Basic</div>
+      <div class="product-desc">3.3h GPU/tháng. Tạo hình AI sắc nét, phong cách nghệ thuật. 200 ảnh/tháng approx.</div>
+      <div class="pricing-row">
+        <div class="price-badge"><div class="price-duration">1 tháng</div><div class="price-amount">250k</div></div>
+        <div class="price-badge"><div class="price-duration">3 tháng</div><div class="price-amount">680k</div><div class="price-save">Tiết 70k</div></div>
+      </div>
+      <div class="product-footer">
+        <div class="stock"><div class="dot"></div> Còn hàng</div>
+        <button class="order-btn" onclick="fillOrder('Midjourney Basic')">Đặt ngay</button>
+      </div>
+    </div>
+
+    <!-- Cursor Pro -->
+    <div class="product-card" data-cat="code">
+      <div class="product-header">
+        <div class="product-icon" style="background:rgba(34,197,94,0.12)">⌨️</div>
+        <span class="badge-hot badge-new">NEW</span>
+      </div>
+      <div class="product-name">Cursor Pro</div>
+      <div class="product-desc">AI code editor mạnh nhất. Codebase chat, auto-complete, giải bug tức thì.</div>
+      <div class="pricing-row">
+        <div class="price-badge"><div class="price-duration">1 tháng</div><div class="price-amount">200k</div></div>
+        <div class="price-badge"><div class="price-duration">3 tháng</div><div class="price-amount">550k</div><div class="price-save">Tiết 50k</div></div>
+      </div>
+      <div class="product-footer">
+        <div class="stock"><div class="dot"></div> Còn hàng</div>
+        <button class="order-btn" onclick="fillOrder('Cursor Pro')">Đặt ngay</button>
+      </div>
+    </div>
+
+    <!-- Perplexity Pro -->
+    <div class="product-card" data-cat="chat">
+      <div class="product-header">
+        <div class="product-icon" style="background:rgba(79,142,255,0.12)">🔍</div>
+      </div>
+      <div class="product-name">Perplexity Pro</div>
+      <div class="product-desc">AI search không quảng cáo. Dùng Claude, GPT-4o để tìm kiếm, nghiên cứu sâu.</div>
+      <div class="pricing-row">
+        <div class="price-badge"><div class="price-duration">1 tháng</div><div class="price-amount">160k</div></div>
+        <div class="price-badge"><div class="price-duration">3 tháng</div><div class="price-amount">430k</div><div class="price-save">Tiết 50k</div></div>
+      </div>
+      <div class="product-footer">
+        <div class="stock"><div class="dot"></div> Còn hàng</div>
+        <button class="order-btn" onclick="fillOrder('Perplexity Pro')">Đặt ngay</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- BẢNG SO SÁNH -->
+<section id="compare">
+  <div class="section-header">
+    <div class="section-label">So sánh</div>
+    <h2 class="section-title">Bảng giá đầy đủ</h2>
+    <p class="section-desc">So sánh giá gốc vs giá reseller của chúng tôi</p>
+  </div>
+  <div class="comparison-table">
+    <div class="ct-header">
+      <span>Công cụ</span>
+      <span style="text-align:center">1 tháng</span>
+      <span style="text-align:center">3 tháng</span>
+      <span style="text-align:center">6 tháng</span>
+      <span style="text-align:center">1 năm</span>
+    </div>
+    <div class="ct-row">
+      <div class="tool-info"><span class="tool-icon">🤖</span><div><div class="tool-name">ChatGPT Plus</div><div class="tool-tier">GPT-4o · DALL·E</div></div></div>
+      <div class="price highlight">180k</div><div class="price">490k</div><div class="price">950k</div><div class="price">1.6M</div>
+    </div>
+    <div class="ct-row">
+      <div class="tool-info"><span class="tool-icon">✦</span><div><div class="tool-name">Claude Pro</div><div class="tool-tier">Sonnet 4 · Projects</div></div></div>
+      <div class="price highlight">190k</div><div class="price">520k</div><div class="price">980k</div><div class="price">1.7M</div>
+    </div>
+    <div class="ct-row">
+      <div class="tool-info"><span class="tool-icon">♊</span><div><div class="tool-name">Gemini Advanced</div><div class="tool-tier">1.5 Pro · 2TB Drive</div></div></div>
+      <div class="price highlight">150k</div><div class="price">400k</div><div class="price">750k</div><div class="price">1.4M</div>
+    </div>
+    <div class="ct-row">
+      <div class="tool-info"><span class="tool-icon">🎨</span><div><div class="tool-name">Midjourney Basic</div><div class="tool-tier">3.3h GPU · ~200 ảnh</div></div></div>
+      <div class="price highlight">250k</div><div class="price">680k</div><div class="price">—</div><div class="price">—</div>
+    </div>
+    <div class="ct-row">
+      <div class="tool-info"><span class="tool-icon">⌨️</span><div><div class="tool-name">Cursor Pro</div><div class="tool-tier">AI Code Editor</div></div></div>
+      <div class="price highlight">200k</div><div class="price">550k</div><div class="price">—</div><div class="price">—</div>
+    </div>
+    <div class="ct-row">
+      <div class="tool-info"><span class="tool-icon">🔍</span><div><div class="tool-name">Perplexity Pro</div><div class="tool-tier">AI Search · Multi-model</div></div></div>
+      <div class="price highlight">160k</div><div class="price">430k</div><div class="price">—</div><div class="price">—</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- HOW TO ORDER -->
+<section id="guide">
+  <div class="section-header">
+    <div class="section-label">Hướng dẫn</div>
+    <h2 class="section-title">Mua hàng siêu đơn giản</h2>
+    <p class="section-desc">Chỉ 4 bước, nhận tài khoản trong 5 phút</p>
+  </div>
+  <div class="steps">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <div class="step-title">Chọn sản phẩm</div>
+      <div class="step-desc">Xem bảng giá, chọn tool AI phù hợp với nhu cầu và ngân sách của bạn.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <div class="step-title">Điền form đặt hàng</div>
+      <div class="step-desc">Điền tên, liên hệ và sản phẩm muốn mua vào form bên dưới hoặc nhắn Zalo/Telegram.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <div class="step-title">Thanh toán</div>
+      <div class="step-desc">Chuyển khoản theo thông tin được gửi. Hỗ trợ MoMo, ngân hàng, Viettel Money.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">04</div>
+      <div class="step-title">Nhận tài khoản</div>
+      <div class="step-desc">Tài khoản giao trong 5–30 phút sau khi xác nhận thanh toán. Bảo hành đầy đủ.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="section-header">
+    <div class="section-label">Đánh giá</div>
+    <h2 class="section-title">Khách hàng nói gì?</h2>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Mua ChatGPT Plus lần đầu, giao cực nhanh trong 10 phút. Tài khoản dùng ổn định suốt 3 tháng. Sẽ tiếp tục ủng hộ!"</div>
+      <div class="reviewer"><div class="reviewer-avatar">T</div><div><div class="reviewer-name">Thanh N.</div><div class="reviewer-date">Tháng 2, 2025</div></div></div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Claude Pro dùng để viết code và phân tích dữ liệu, ngon hơn hẳn ChatGPT. Shop support nhiệt tình, hỏi gì trả lời ngay."</div>
+      <div class="reviewer"><div class="reviewer-avatar">M</div><div><div class="reviewer-name">Minh P.</div><div class="reviewer-date">Tháng 1, 2025</div></div></div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Mua combo ChatGPT + Midjourney cho agency thiết kế. Tiết kiệm được kha khá so với mua trực tiếp. Recommend 10/10!"</div>
+      <div class="reviewer"><div class="reviewer-avatar">H</div><div><div class="reviewer-name">Hương L.</div><div class="reviewer-date">Tháng 12, 2024</div></div></div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★☆</div>
+      <div class="review-text">"Cursor Pro quá xịn, dùng xong không thể quay về code tay được. Giá rẻ hơn nhiều so với mua USD trực tiếp."</div>
+      <div class="reviewer"><div class="reviewer-avatar">A</div><div><div class="reviewer-name">An T.</div><div class="reviewer-date">Tháng 11, 2024</div></div></div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Gemini Advanced kèm 2TB Drive rất tiện. Mua lần đầu hơi lo, nhưng giao nhanh và có bảo hành hẳn hoi. Tin tưởng rồi!"</div>
+      <div class="reviewer"><div class="reviewer-avatar">L</div><div><div class="reviewer-name">Linh K.</div><div class="reviewer-date">Tháng 10, 2024</div></div></div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Shop chuyên nghiệp, có bảng giá rõ ràng, không chèo kéo. Hỏi tư vấn tool nào phù hợp cũng được giải thích cặn kẽ."</div>
+      <div class="reviewer"><div class="reviewer-avatar">B</div><div><div class="reviewer-name">Bảo D.</div><div class="reviewer-date">Tháng 9, 2024</div></div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ORDER FORM -->
+<section id="order">
+  <div class="section-header">
+    <div class="section-label">Đặt hàng</div>
+    <h2 class="section-title">Mua ngay hôm nay</h2>
+  </div>
+  <div class="form-container">
+    <div class="form-title">Form đặt hàng</div>
+    <div class="form-sub">Điền thông tin, nhận tài khoản trong 5–30 phút ⚡</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Họ và tên *</label>
+        <input type="text" placeholder="Nguyễn Văn A" id="name-input">
+      </div>
+      <div class="form-group">
+        <label>Số điện thoại / Zalo *</label>
+        <input type="text" id="phone-input" placeholder="0912 345 678">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Sản phẩm muốn mua *</label>
+      <select id="product-select">
+        <option value="">— Chọn sản phẩm —</option>
+        <option>ChatGPT Plus - 1 tháng (180k)</option>
+        <option>ChatGPT Plus - 3 tháng (490k)</option>
+        <option>ChatGPT Plus - 1 năm (1.6M)</option>
+        <option>Claude Pro - 1 tháng (190k)</option>
+        <option>Claude Pro - 3 tháng (520k)</option>
+        <option>Gemini Advanced - 1 tháng (150k)</option>
+        <option>Midjourney Basic - 1 tháng (250k)</option>
+        <option>Cursor Pro - 1 tháng (200k)</option>
+        <option>Perplexity Pro - 1 tháng (160k)</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Ghi chú (không bắt buộc)</label>
+      <textarea id="note-input" placeholder="Yêu cầu đặc biệt, hỏi thêm về sản phẩm..."></textarea>
+    </div>
+    <button class="submit-btn" onclick="submitForm()">🚀 Gửi đơn hàng</button>
+    <div class="contact-alt">
+      Hoặc liên hệ trực tiếp qua
+      <a href="#">Zalo: 0912 345 678</a> ·
+      <a href="#">Telegram: @aishopvn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 AISubShop · Reseller Chính Hãng · Hỗ trợ 24/7</p>
+  <p style="margin-top:6px;font-size:12px">Giá có thể thay đổi theo tỷ giá USD. Liên hệ để cập nhật giá mới nhất.</p>
+</footer>
+
+<script>
+  function switchTab(cat) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    document.querySelectorAll('.product-card').forEach(card => {
+      if (cat === 'all' || card.dataset.cat === cat) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  function fillOrder(productName) {
+    const sel = document.getElementById('product-select');
+    for (let opt of sel.options) {
+      if (opt.text.startsWith(productName)) {
+        sel.value = opt.value;
+        break;
+      }
+    }
+    document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // ✏️ THAY URL NÀY bằng Apps Script URL của bạn
+  const SCRIPT_URL = 'PASTE_YOUR_SCRIPT_URL_HERE';
+
+  async function submitForm() {
+    const name = document.getElementById('name-input').value.trim();
+    const phone = document.getElementById('phone-input').value.trim();
+    const product = document.getElementById('product-select').value;
+    const note = document.getElementById('note-input').value.trim();
+
+    if (!name || !phone || !product) {
+      showToast('⚠️ Vui lòng điền đủ: tên, SĐT và chọn sản phẩm!', 'warn');
+      return;
+    }
+
+    const btn = document.querySelector('.submit-btn');
+    btn.textContent = '⏳ Đang gửi...';
+    btn.disabled = true;
+
+    try {
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, product, note })
+      });
+      showToast(`✅ Đã nhận đơn của ${name}! Shop sẽ liên hệ trong vài phút.`, 'success');
+      // Reset form
+      document.getElementById('name-input').value = '';
+      document.getElementById('phone-input').value = '';
+      document.getElementById('product-select').value = '';
+      document.getElementById('note-input').value = '';
+    } catch (err) {
+      showToast('❌ Lỗi kết nối. Vui lòng nhắn Zalo/Telegram trực tiếp!', 'error');
+    }
+
+    btn.textContent = '🚀 Gửi đơn hàng';
+    btn.disabled = false;
+  }
+
+  function showToast(msg, type) {
+    const existing = document.querySelector('.toast');
+    if (existing) existing.remove();
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = msg;
+    const colors = { success: '#22c55e', warn: '#f59e0b', error: '#ef4444' };
+    toast.style.cssText = `
+      position:fixed; bottom:32px; left:50%; transform:translateX(-50%);
+      background:${colors[type]}; color:#fff; padding:14px 28px;
+      border-radius:12px; font-size:14px; font-weight:500;
+      box-shadow:0 8px 32px rgba(0,0,0,0.3); z-index:9999;
+      animation: fadeUp 0.3s ease;
+    `;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 5000);
+  }
+</script>
+
+</body>
+</html>
